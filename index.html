@@ -592,4 +592,393 @@ footer {
       <article class="info">
         <h3>03. Proses hasil</h3>
         <p>Tekan tombol sesuai fungsi alat. Hasil akan ditampilkan di halaman.</p>
-      </arti
+      </article>
+      <article class="info">
+        <h3>04. Salin hasil</h3>
+        <p>Gunakan tombol salin jika tersedia, lalu tempel hasil ke aplikasi yang kamu perlukan.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-head">
+      <h2>Tentang DAWN TOOLS</h2>
+      <p>Teknologi sederhana untuk membantu pekerjaan sehari-hari.</p>
+    </div>
+    <div class="info-grid">
+      <article class="info">
+        <h3>Visi kami</h3>
+        <p>Membuat alat digital yang praktis dan mudah dijangkau oleh lebih banyak orang.</p>
+      </article>
+      <article class="info">
+        <h3>Untuk siapa?</h3>
+        <p>Pelajar, mahasiswa, pekerja, kreator konten, pemilik usaha, developer, dan siapa pun yang membutuhkan alat sederhana.</p>
+      </article>
+      <article class="info">
+        <h3>Komitmen</h3>
+        <p>Mengembangkan fitur yang berguna, menjaga pengalaman penggunaan, dan menjelaskan fungsi serta batasan setiap alat dengan jujur.</p>
+      </article>
+      <article class="info">
+        <h3>Privasi</h3>
+        <p>Fitur yang tersedia berjalan di browser. Hindari memasukkan informasi sensitif dan selalu periksa hasil sebelum digunakan.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="support">
+    <div class="section-head">
+      <h2>Bantu DAWN TOOLS terus berkembang</h2>
+      <p>Dukunganmu dapat membantu pengembangan, perawatan, dan penambahan alat digital berikutnya.</p>
+    </div>
+
+    <div class="qrisbox">
+      <span class="tag">DUKUNG PENGEMBANGAN</span>
+      <h3>Jika bermanfaat, dukung karya ini.</h3>
+      <p class="muted small">
+        Dukungan bersifat sukarela. Tidak ada kewajiban untuk membayar
+        atau berdonasi agar dapat menggunakan DAWN TOOLS.
+      </p>
+
+      <img
+        src="Kode%20QRIS%20Python.%2C%20K.%20%26%20O.%2C%20Digital%20%26%20Kreatif%20%281%29.png"
+        alt="QRIS GoPay Merchant untuk mendukung DAWN TOOLS"
+        onerror="this.style.display='none';document.getElementById('qrisMissing').style.display='block'">
+
+      <div id="qrisMissing" class="muted small" style="display:none">
+        Gambar QRIS sementara tidak dapat dimuat. Silakan coba lagi nanti.
+      </div>
+
+      <div class="qris-caption">
+        <p><strong>QRIS GoPay Merchant</strong></p>
+        <p class="muted small">
+          Nama merchant: PYTHON., K. &amp; O., DIGITAL.
+          Pindai menggunakan aplikasi pembayaran yang mendukung QRIS.
+          Pastikan nama penerima dan nominal sudah benar sebelum membayar.
+        </p>
+        <p class="muted small">
+          Pembayaran diproses oleh penyedia QRIS, bukan oleh website ini.
+          DAWN TOOLS tidak pernah meminta PIN atau OTP.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>DAWN TOOLS</strong><br>
+  Satu tempat. Banyak solusi.<br>
+  Free Digital Tools • Dibuat untuk membantu pekerjaan digital sehari-hari.
+</footer>
+
+<script>
+const getValue = id => document.getElementById(id).value;
+const show = (id, value) => {
+  document.getElementById(id).textContent = value;
+};
+
+async function copyResult(id) {
+  const value = document.getElementById(id).textContent;
+  if (!value) {
+    alert("Belum ada hasil untuk disalin.");
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(value);
+    alert("Hasil berhasil disalin.");
+  } catch {
+    alert("Salin hasil secara manual dengan menekan lama teks.");
+  }
+}
+
+// Pencarian dan filter kategori
+let activeFilter = "all";
+
+function filterTools() {
+  const query = getValue("toolSearch").trim().toLowerCase();
+  const cards = document.querySelectorAll("#toolGrid .card");
+  let visible = 0;
+
+  cards.forEach(card => {
+    const category = card.dataset.category;
+    const content = card.textContent.toLowerCase();
+    const matchesCategory =
+      activeFilter === "all" || category === activeFilter;
+    const matchesSearch = !query || content.includes(query);
+    const showCard = matchesCategory && matchesSearch;
+
+    card.hidden = !showCard;
+    if (showCard) visible++;
+  });
+
+  document.getElementById("noResults").style.display =
+    visible ? "none" : "block";
+}
+
+document.getElementById("toolSearch").addEventListener("input", filterTools);
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".filter").forEach(item =>
+      item.classList.remove("active")
+    );
+    button.classList.add("active");
+    activeFilter = button.dataset.filter;
+    filterTools();
+  });
+});
+
+// 1. Penghitung kata
+function countWords() {
+  const text = getValue("wordInput");
+  const words = text.trim() ? text.trim().split(/\s+/u).length : 0;
+  show("wordResult",
+    `${words} kata • ${text.length} karakter • ${[...text].filter(c => !/\s/u.test(c)).length} tanpa spasi`);
+}
+
+// 2. Pengubah huruf
+function changeCase(type) {
+  let text = getValue("caseInput");
+  if (type === "upper") text = text.toUpperCase();
+  if (type === "lower") text = text.toLowerCase();
+  if (type === "title") {
+    text = text.toLowerCase().replace(/\b\p{L}/gu, c => c.toUpperCase());
+  }
+  show("caseResult", text);
+}
+
+// 3. Pembersih teks
+function cleanSpaces() {
+  show("cleanResult",
+    getValue("cleanInput").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim());
+}
+function removeEmptyLines() {
+  show("cleanResult",
+    getValue("cleanInput").split(/\r?\n/).filter(line => line.trim()).join("\n"));
+}
+
+// 4. Pengurut baris
+function sortLines(descending) {
+  const lines = getValue("sortInput").split(/\r?\n/).filter(x => x.trim());
+  lines.sort((a, b) => a.localeCompare(b, "id"));
+  if (descending) lines.reverse();
+  show("sortResult", lines.join("\n"));
+}
+
+// 5. Hapus duplikat
+function removeDuplicates() {
+  const lines = getValue("duplicateInput").split(/\r?\n/);
+  show("duplicateResult",
+    [...new Set(lines.map(x => x.trim()).filter(Boolean))].join("\n"));
+}
+
+// 6. Pembalik teks
+function reverseText() {
+  show("reverseResult", [...getValue("reverseInput")].reverse().join(""));
+}
+
+// 7. JSON
+function formatJSON(minify) {
+  try {
+    const parsed = JSON.parse(getValue("jsonInput"));
+    show("jsonResult", JSON.stringify(parsed, null, minify ? 0 : 2));
+  } catch (error) {
+    show("jsonResult", "JSON tidak valid: " + error.message);
+  }
+}
+
+// 8. Base64
+function base64Tool(decode) {
+  try {
+    const text = getValue("baseInput");
+    if (decode) {
+      const binary = atob(text.trim());
+      const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+      show("baseResult", new TextDecoder().decode(bytes));
+    } else {
+      const bytes = new TextEncoder().encode(text);
+      let binary = "";
+      bytes.forEach(byte => binary += String.fromCharCode(byte));
+      show("baseResult", btoa(binary));
+    }
+  } catch {
+    show("baseResult", "Gagal. Periksa input atau format Base64.");
+  }
+}
+
+// 9. URL
+function urlTool(decode) {
+  try {
+    const text = getValue("urlInput");
+    show("urlResult", decode ? decodeURIComponent(text) : encodeURIComponent(text));
+  } catch {
+    show("urlResult", "Format URL tidak valid.");
+  }
+}
+
+// 10. Slug
+function makeSlug() {
+  const slug = getValue("slugInput")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  show("slugResult", slug);
+}
+
+// 11. Password generator
+function generatePassword() {
+  const length = Math.max(8, Math.min(64, Number(getValue("passwordLength")) || 18));
+  const chars = document.getElementById("passwordSymbols").checked
+    ? "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*()-_=+[]{}?"
+    : "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+  // Rejection sampling menghindari bias modulo.
+  const limit = Math.floor(4294967296 / chars.length) * chars.length;
+  let password = "";
+
+  while (password.length < length) {
+    const random = new Uint32Array(length - password.length + 8);
+    crypto.getRandomValues(random);
+
+    for (const number of random) {
+      if (number < limit && password.length < length) {
+        password += chars[number % chars.length];
+      }
+    }
+  }
+
+  show("passwordResult", password);
+}
+
+// 12. Kalkulator
+function calculate() {
+  const input = getValue("calcInput").replace(/\s/g, "");
+  let pos = 0;
+
+  function expression() {
+    let value = term();
+    while (input[pos] === "+" || input[pos] === "-") {
+      const operator = input[pos++];
+      const next = term();
+      value = operator === "+" ? value + next : value - next;
+    }
+    return value;
+  }
+
+  function term() {
+    let value = factor();
+    while (["*", "/", "%"].includes(input[pos])) {
+      const operator = input[pos++];
+      const next = factor();
+      if ((operator === "/" || operator === "%") && next === 0) {
+        throw new Error("Tidak bisa membagi dengan nol.");
+      }
+      if (operator === "*") value *= next;
+      if (operator === "/") value /= next;
+      if (operator === "%") value %= next;
+    }
+    return value;
+  }
+
+  function factor() {
+    if (input[pos] === "+") { pos++; return factor(); }
+    if (input[pos] === "-") { pos++; return -factor(); }
+    if (input[pos] === "(") {
+      pos++;
+      const value = expression();
+      if (input[pos++] !== ")") throw new Error("Kurung tidak lengkap.");
+      return value;
+    }
+    const match = input.slice(pos).match(/^(?:\d+\.?\d*|\.\d+)/);
+    if (!match) throw new Error("Periksa angka dan operator.");
+    pos += match[0].length;
+    return Number(match[0]);
+  }
+
+  try {
+    if (!input || !/^[0-9+\-*/().%]+$/.test(input)) {
+      throw new Error("Input tidak valid.");
+    }
+    const result = expression();
+    if (pos !== input.length || !Number.isFinite(result)) {
+      throw new Error("Perhitungan tidak valid.");
+    }
+    show("calcResult", String(result));
+  } catch (error) {
+    show("calcResult", error.message);
+  }
+}
+
+// 13. HEX
+function textToHex() {
+  const bytes = new TextEncoder().encode(getValue("hexInput"));
+  show("hexResult",
+    Array.from(bytes, b => b.toString(16).padStart(2, "0")).join(" "));
+}
+function hexToText() {
+  try {
+    const hex = getValue("hexResult").trim();
+    if (!hex || !/^(?:[0-9a-fA-F]{2}\s*)+$/.test(hex)) {
+      throw new Error();
+    }
+    const bytes = hex.trim().split(/\s+/).map(x => parseInt(x, 16));
+    show("hexResult", new TextDecoder().decode(new Uint8Array(bytes)));
+  } catch {
+    show("hexResult", "Format HEX tidak valid.");
+  }
+}
+
+// 14. Timer
+let timerInterval = null;
+let timerEnd = 0;
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+  timerEnd = 0;
+}
+
+function startTimer() {
+  stopTimer();
+
+  const minutes = Number(getValue("timerMinutes"));
+  if (!Number.isFinite(minutes) || minutes < 1 || minutes > 240) {
+    show("timerResult", "Masukkan durasi antara 1 sampai 240 menit.");
+    return;
+  }
+
+  timerEnd = Date.now() + minutes * 60 * 1000;
+
+  function tick() {
+    const seconds = Math.max(0, Math.ceil((timerEnd - Date.now()) / 1000));
+    const remainingMinutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    show("timerResult",
+      `${remainingMinutes}:${String(remainingSeconds).padStart(2, "0")}`);
+
+    if (seconds <= 0) {
+      stopTimer();
+      show("timerResult", "Waktu habis!");
+      alert("Timer DAWN TOOLS selesai.");
+    }
+  }
+
+  tick();
+  timerInterval = setInterval(tick, 250);
+}
+
+// 15. Checklist
+function makeChecklist() {
+  const tasks = getValue("checkInput")
+    .split(/\r?\n/)
+    .map(x => x.trim())
+    .filter(Boolean);
+  show("checkResult", tasks.map(task => "☐ " + task).join("\n"));
+}
+</script>
+</body>
+</html>
