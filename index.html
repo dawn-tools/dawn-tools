@@ -5,18 +5,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#09111e">
-<meta name="description" content="DAWN TOOLS - Kumpulan alat digital gratis untuk semua.">
-<title>DAWN TOOLS | Free Digital Tools</title>
+<meta name="description" content="DAWN TOOLS menyediakan 15 alat digital gratis untuk mengolah teks, membantu pekerjaan, dan kebutuhan developer. Praktis, mudah, langsung dari browser.">
+<meta name="keywords" content="tools gratis, alat digital, penghitung kata, JSON formatter, Base64, kalkulator, DAWN TOOLS">
+<meta property="og:title" content="DAWN TOOLS — Satu Tempat, Banyak Solusi">
+<meta property="og:description" content="15 alat digital praktis dan gratis. Gunakan langsung dari browser HP atau komputer.">
+<title>DAWN TOOLS — Satu Tempat, Banyak Solusi</title>
 
 <style>
 :root {
-  --bg:#09111e;
-  --panel:#111d2e;
-  --line:#293b55;
-  --text:#eef5ff;
-  --muted:#9fb1c9;
-  --mint:#65e6c1;
-  --blue:#263d5b;
+  --bg:#08111f;
+  --panel:#101e30;
+  --panel2:#14263c;
+  --line:#263d58;
+  --text:#edf5ff;
+  --muted:#9fb2ca;
+  --mint:#68e6c2;
+  --blue:#203b59;
+  --shadow:0 14px 35px rgba(0,0,0,.22);
 }
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
@@ -24,72 +29,218 @@ body {
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:system-ui,Arial,sans-serif;
+  font-family:system-ui,-apple-system,Arial,sans-serif;
+  line-height:1.6;
 }
+a {color:inherit}
+button,input,textarea {font:inherit}
+.wrap {width:min(1080px,calc(100% - 30px));margin:auto}
 header {
-  padding:26px 17px;
-  background:linear-gradient(135deg,#142943,#0b1220);
+  background:
+    radial-gradient(ellipse at 80% 0%,rgba(104,230,194,.13),transparent 42%),
+    linear-gradient(135deg,#142b45,#091321 75%);
   border-bottom:1px solid var(--line);
 }
-.wrap {max-width:1050px;margin:auto}
-h1 {font-size:29px;letter-spacing:1px;margin:0}
-header p {color:var(--muted);margin:7px 0}
-nav {display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-nav a {
-  color:#d9e8fa;
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:17px 0;
+}
+.brand {
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+.brand span {color:var(--mint)}
+.tag {
+  display:inline-block;
+  color:#a4f3dc;
+  background:#15382f;
+  border:1px solid #285c4e;
+  padding:5px 10px;
+  border-radius:30px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.7px;
+}
+.hero {padding:45px 0 52px}
+.hero h1 {
+  max-width:750px;
+  font-size:clamp(34px,7vw,61px);
+  line-height:1.08;
+  letter-spacing:-1.8px;
+  margin:15px 0;
+}
+.hero h1 span {color:var(--mint)}
+.hero p {
+  color:var(--muted);
+  max-width:650px;
+  font-size:16px;
+  margin:0 0 22px;
+}
+.actions {display:flex;flex-wrap:wrap;gap:10px}
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   text-decoration:none;
-  background:#1c3049;
-  border:1px solid #344c69;
-  padding:8px 12px;
-  border-radius:20px;
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:11px 17px;
+  background:var(--mint);
+  color:#06251d;
+  font-weight:800;
+  cursor:pointer;
+}
+.btn.secondary {
+  color:var(--text);
+  background:#1a3049;
+  border-color:#35516e;
+}
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:28px;
+  max-width:600px;
+}
+.stat {
+  padding:12px;
+  background:rgba(18,36,56,.75);
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.stat strong {display:block;color:var(--mint);font-size:21px}
+.stat small {color:var(--muted)}
+nav {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:0 0 17px;
+}
+nav a {
+  text-decoration:none;
+  color:#d6e7f9;
+  background:#172d45;
+  border:1px solid #304b68;
+  border-radius:25px;
+  padding:7px 12px;
   font-size:13px;
 }
-main {padding:18px 14px 45px}
+main {padding:25px 0 55px}
+.section {margin:0 0 34px}
+.section-head {margin-bottom:16px}
+.section-head h2 {font-size:23px;margin:0 0 5px}
+.section-head p {color:var(--muted);margin:0;font-size:14px}
 .notice {
-  background:#14263a;
-  border:1px solid #31506b;
-  padding:13px;
+  background:#14283d;
+  border:1px solid #31516e;
   border-radius:13px;
-  margin-bottom:16px;
-  color:#cbdcf0;
+  padding:14px 16px;
+  margin-bottom:25px;
+  color:#d1e0f1;
+  font-size:14px;
+}
+.notice strong {color:var(--mint)}
+.benefits {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  gap:12px;
+}
+.benefit {
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel);
+}
+.benefit .symbol {font-size:23px}
+.benefit h3 {font-size:15px;margin:7px 0 4px}
+.benefit p {font-size:13px;color:var(--muted);margin:0}
+.toolbar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-bottom:14px;
+}
+.search {
+  flex:1 1 220px;
+  min-width:0;
+  background:#0b1828;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px 13px;
+  color:var(--text);
+}
+.filters {display:flex;flex-wrap:wrap;gap:7px}
+.filter {
+  background:#172d45;
+  color:#dceafa;
+  border:1px solid #344e6b;
+  border-radius:30px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:12px;
+}
+.filter.active {
+  background:var(--mint);
+  color:#06251d;
+  border-color:var(--mint);
+  font-weight:800;
 }
 .grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
   gap:13px;
 }
 .card {
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:15px;
   min-width:0;
+  padding:17px;
+  border-radius:15px;
+  background:linear-gradient(145deg,#13243a,#101c2c);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
 }
-h2 {font-size:17px;margin:0 0 11px}
+.card h3 {font-size:16px;margin:0 0 5px}
+.card .desc {color:var(--muted);font-size:12px;min-height:38px;margin:0 0 10px}
+.card[hidden] {display:none}
+.number {
+  color:var(--mint);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.7px;
+  margin-bottom:5px;
+}
 label {
   display:block;
   color:var(--muted);
   font-size:13px;
   margin:9px 0 5px;
 }
-textarea,input {
+textarea,input:not([type=checkbox]) {
   width:100%;
-  background:#091424;
+  min-width:0;
+  background:#091525;
   color:var(--text);
-  border:1px solid #344a67;
+  border:1px solid #344b68;
   border-radius:9px;
   padding:11px;
-  font:inherit;
+  outline:none;
 }
 textarea {min-height:85px;resize:vertical}
-input[type=checkbox] {width:auto}
+textarea:focus,input:focus {
+  border-color:var(--mint);
+  box-shadow:0 0 0 2px rgba(104,230,194,.12);
+}
+input[type=checkbox] {width:auto;accent-color:var(--mint)}
 button {
   background:var(--mint);
-  color:#062219;
+  color:#06251d;
   border:0;
   border-radius:9px;
-  padding:10px 13px;
-  font-weight:700;
+  padding:9px 12px;
+  font-weight:800;
   margin:7px 5px 0 0;
   cursor:pointer;
 }
@@ -100,45 +251,66 @@ button:active {transform:scale(.98)}
   overflow-wrap:anywhere;
   background:#081321;
   border:1px solid var(--line);
-  padding:10px;
+  padding:11px;
   border-radius:9px;
-  margin-top:9px;
-  min-height:40px;
+  margin-top:10px;
+  min-height:42px;
   color:#dceaff;
+  font-size:13px;
 }
 .muted {color:var(--muted)}
+.small {font-size:12px}
 .wide {grid-column:1/-1}
+.empty {
+  display:none;
+  text-align:center;
+  color:var(--muted);
+  padding:20px;
+}
+.info-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  gap:12px;
+}
+.info {
+  padding:17px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+.info h3 {font-size:15px;margin:0 0 6px}
+.info p {font-size:13px;color:var(--muted);margin:0}
 .qrisbox {
   border:1px dashed #54708e;
-  border-radius:12px;
+  border-radius:14px;
   background:#0a1626;
-  padding:14px;
+  padding:18px;
   text-align:center;
-  min-height:160px;
-  display:grid;
-  place-items:center;
 }
 .qrisbox img {
   display:block;
   width:100%;
-  max-width:420px;
+  max-width:340px;
   height:auto;
-  margin:auto;
-  border-radius:8px;
+  margin:12px auto;
+  border-radius:9px;
+  background:white;
 }
-.tag {
-  display:inline-block;
-  color:#9cf0d9;
-  background:#15372f;
-  padding:4px 9px;
-  border-radius:20px;
-  font-size:12px;
-}
+.qris-caption {max-width:650px;margin:12px auto 0}
 footer {
+  border-top:1px solid var(--line);
   text-align:center;
   color:var(--muted);
   padding:25px 12px;
   font-size:12px;
+}
+@media(max-width:520px) {
+  .hero {padding:32px 0 38px}
+  .stats {grid-template-columns:repeat(3,1fr)}
+  .stat {padding:9px}
+  .stat strong {font-size:18px}
+  .stat small {font-size:10px}
+  .card {padding:14px}
 }
 </style>
 </head>
@@ -147,13 +319,36 @@ footer {
 
 <header>
   <div class="wrap">
-    <span class="tag">FREE DIGITAL TOOLS</span>
-    <h1>DAWN TOOLS</h1>
-    <p>Alat digital praktis, gratis, dan mudah digunakan semua orang.</p>
-    <nav>
-      <a href="#tools">Semua Tools</a>
-      <a href="#developer">Developer</a>
-      <a href="#productivity">Produktivitas</a>
+    <div class="topbar">
+      <div class="brand">DAWN<span>TOOLS</span></div>
+      <span class="tag">FREE DIGITAL TOOLS</span>
+    </div>
+
+    <div class="hero">
+      <span class="tag">PRAKTIS • GRATIS • LANGSUNG DIGUNAKAN</span>
+      <h1>Satu tempat.<br><span>Banyak solusi.</span></h1>
+      <p>
+        Selesaikan pekerjaan digital sehari-hari dengan lebih praktis.
+        Olah teks, format data, hitung angka, buat password, dan gunakan
+        berbagai alat lainnya langsung dari browser HP atau komputer.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#tools">Jelajahi 15 Tools</a>
+        <a class="btn secondary" href="#about">Kenali DAWN TOOLS</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>15</strong><small>Alat digital</small></div>
+        <div class="stat"><strong>Gratis</strong><small>Untuk digunakan</small></div>
+        <div class="stat"><strong>Browser</strong><small>Tanpa instalasi</small></div>
+      </div>
+    </div>
+
+    <nav aria-label="Navigasi utama">
+      <a href="#tools">Tools</a>
+      <a href="#benefits">Keunggulan</a>
+      <a href="#guide">Panduan</a>
+      <a href="#about">Tentang</a>
       <a href="#support">Dukung DAWN</a>
     </nav>
   </div>
@@ -161,443 +356,240 @@ footer {
 
 <main class="wrap">
 
-<div class="notice">
-  <b>Privasi pengguna:</b>
-  Pemrosesan alat di halaman ini dilakukan langsung di browser.
-  Jangan memasukkan PIN, OTP, kata sandi, atau informasi rahasia.
-</div>
-
-<div class="grid" id="tools">
-
-<!-- 1 -->
-<section class="card">
-<h2>1. Penghitung Kata</h2>
-<textarea id="wordInput" placeholder="Ketik atau tempel teks..." oninput="countWords()"></textarea>
-<div class="out" id="wordResult">0 kata • 0 karakter • 0 tanpa spasi</div>
-</section>
-
-<!-- 2 -->
-<section class="card">
-<h2>2. Pengubah Huruf</h2>
-<textarea id="caseInput" placeholder="Masukkan teks..."></textarea>
-<button onclick="changeCase('upper')">HURUF BESAR</button>
-<button class="alt" onclick="changeCase('lower')">huruf kecil</button>
-<button class="alt" onclick="changeCase('title')">Title Case</button>
-<div class="out" id="caseResult"></div>
-<button class="alt" onclick="copyResult('caseResult')">Salin hasil</button>
-</section>
-
-<!-- 3 -->
-<section class="card">
-<h2>3. Pembersih Teks</h2>
-<textarea id="cleanInput" placeholder="Masukkan teks..."></textarea>
-<button onclick="cleanSpaces()">Rapikan spasi</button>
-<button class="alt" onclick="removeEmptyLines()">Hapus baris kosong</button>
-<div class="out" id="cleanResult"></div>
-<button class="alt" onclick="copyResult('cleanResult')">Salin hasil</button>
-</section>
-
-<!-- 4 -->
-<section class="card">
-<h2>4. Pengurut Baris</h2>
-<textarea id="sortInput" placeholder="Satu item per baris..."></textarea>
-<button onclick="sortLines(false)">Urut A–Z</button>
-<button class="alt" onclick="sortLines(true)">Urut Z–A</button>
-<div class="out" id="sortResult"></div>
-<button class="alt" onclick="copyResult('sortResult')">Salin hasil</button>
-</section>
-
-<!-- 5 -->
-<section class="card">
-<h2>5. Hapus Duplikat</h2>
-<textarea id="duplicateInput" placeholder="Masukkan daftar..."></textarea>
-<button onclick="removeDuplicates()">Hapus duplikat</button>
-<div class="out" id="duplicateResult"></div>
-<button class="alt" onclick="copyResult('duplicateResult')">Salin hasil</button>
-</section>
-
-<!-- 6 -->
-<section class="card">
-<h2>6. Pembalik Teks</h2>
-<textarea id="reverseInput" placeholder="Masukkan teks..."></textarea>
-<button onclick="reverseText()">Balik teks</button>
-<div class="out" id="reverseResult"></div>
-<button class="alt" onclick="copyResult('reverseResult')">Salin hasil</button>
-</section>
-
-<!-- 7 -->
-<section class="card" id="developer">
-<h2>7. Formatter JSON</h2>
-<textarea id="jsonInput" placeholder='Contoh: {"nama":"DAWN","aktif":true}'></textarea>
-<button onclick="formatJSON(false)">Format JSON</button>
-<button class="alt" onclick="formatJSON(true)">Minify</button>
-<div class="out" id="jsonResult"></div>
-<button class="alt" onclick="copyResult('jsonResult')">Salin hasil</button>
-</section>
-
-<!-- 8 -->
-<section class="card">
-<h2>8. Base64 Encoder / Decoder</h2>
-<textarea id="baseInput" placeholder="Masukkan teks atau Base64..."></textarea>
-<button onclick="base64Tool(false)">Encode</button>
-<button class="alt" onclick="base64Tool(true)">Decode</button>
-<div class="out" id="baseResult"></div>
-<button class="alt" onclick="copyResult('baseResult')">Salin hasil</button>
-</section>
-
-<!-- 9 -->
-<section class="card">
-<h2>9. URL Encoder / Decoder</h2>
-<textarea id="urlInput" placeholder="Masukkan teks atau URL..."></textarea>
-<button onclick="urlTool(false)">Encode URL</button>
-<button class="alt" onclick="urlTool(true)">Decode URL</button>
-<div class="out" id="urlResult"></div>
-<button class="alt" onclick="copyResult('urlResult')">Salin hasil</button>
-</section>
-
-<!-- 10 -->
-<section class="card">
-<h2>10. Pembuat Slug</h2>
-<textarea id="slugInput" placeholder="Judul artikel atau produk..."></textarea>
-<button onclick="makeSlug()">Buat slug</button>
-<div class="out" id="slugResult"></div>
-<button class="alt" onclick="copyResult('slugResult')">Salin hasil</button>
-</section>
-
-<!-- 11 -->
-<section class="card">
-<h2>11. Password Generator</h2>
-<label>Panjang password (8–64)</label>
-<input id="passwordLength" type="number" min="8" max="64" value="18">
-<label><input type="checkbox" id="passwordSymbols" checked> Sertakan simbol</label>
-<button onclick="generatePassword()">Buat password</button>
-<div class="out" id="passwordResult"></div>
-<button class="alt" onclick="copyResult('passwordResult')">Salin hasil</button>
-<small class="muted">Password dibuat pada perangkatmu.</small>
-</section>
-
-<!-- 12 -->
-<section class="card">
-<h2>12. Kalkulator</h2>
-<label>Masukkan perhitungan</label>
-<input id="calcInput" placeholder="Contoh: (12500*3)+5000">
-<button onclick="calculate()">Hitung</button>
-<div class="out" id="calcResult"></div>
-<small class="muted">Mendukung angka, +, -, *, /, %, dan kurung.</small>
-</section>
-
-<!-- 13 -->
-<section class="card">
-<h2>13. Konverter HEX</h2>
-<textarea id="hexInput" placeholder="Masukkan teks..."></textarea>
-<button onclick="textToHex()">Teks ke HEX</button>
-<div class="out" id="hexResult"></div>
-<button class="alt" onclick="hexToText()">HEX ke teks</button>
-</section>
-
-<!-- 14 -->
-<section class="card" id="productivity">
-<h2>14. Timer</h2>
-<label>Durasi dalam menit</label>
-<input id="timerMinutes" type="number" min="1" max="240" value="5">
-<button onclick="startTimer()">Mulai</button>
-<button class="alt" onclick="stopTimer()">Berhenti</button>
-<div class="out" id="timerResult">Timer siap digunakan.</div>
-</section>
-
-<!-- 15 -->
-<section class="card">
-<h2>15. Pembuat Checklist</h2>
-<textarea id="checkInput" placeholder="Satu tugas per baris..."></textarea>
-<button onclick="makeChecklist()">Buat checklist</button>
-<div class="out" id="checkResult"></div>
-<button class="alt" onclick="copyResult('checkResult')">Salin hasil</button>
-</section>
-
-<!-- QRIS -->
-<section class="card wide" id="support">
-<h2>Dukung Pengembangan DAWN TOOLS</h2>
-<p class="muted">
-Jika DAWN TOOLS bermanfaat, kamu dapat mendukung pengembang
-melalui QRIS resmi berikut.
-</p>
-
-<div class="qrisbox">
-  <div>
-    
-<img src="Kode%20QRIS%20Python.%2C%20K.%20%26%20O.%2C%20Digital%20%26%20Kreatif%20%281%29.png"
-     alt="QRIS GoPay Merchant DAWN TOOLS"
-     style="width:220px;max-width:100%;border-radius:12px;"
-     onerror="this.style.display='none';document.getElementById('qrisMissing').style.display='block'">
-
-<div id="qrisMissing" class="muted" style="display:none;">
-  <b>DUKUNG DAWN TOOLS</b><br>
-  Terima kasih telah mendukung pengembangan DAWN TOOLS.
-</div>
-    
+  <div class="notice">
+    <strong>Privasi tetap penting.</strong>
+    Sebagian besar alat di DAWN TOOLS memproses data langsung di browser
+    perangkatmu. Jangan masukkan PIN, OTP, kata sandi akun, atau informasi
+    rahasia ke alat maupun situs yang tidak kamu percayai.
   </div>
-</div>
 
-<p class="muted">
-Nama merchant pada QRIS: PYTHON., K. &amp; O., DIGITAL.
-Pindai melalui aplikasi pembayaran yang mendukung QRIS.
-Pastikan nama penerima yang muncul benar sebelum membayar.
-</p>
-<p class="muted">
-Pembayaran diproses oleh penyedia QRIS, bukan oleh website ini.
-DAWN TOOLS tidak meminta PIN atau OTP.
-</p>
-</section>
+  <section class="section" id="benefits">
+    <div class="section-head">
+      <h2>Mengapa menggunakan DAWN TOOLS?</h2>
+      <p>Dibuat untuk membantu kebutuhan digital sederhana tanpa proses yang berbelit.</p>
+    </div>
+    <div class="benefits">
+      <article class="benefit">
+        <div class="symbol">⚡</div>
+        <h3>Lebih praktis</h3>
+        <p>Berbagai alat tersedia dalam satu halaman. Tidak perlu berpindah-pindah situs untuk pekerjaan sederhana.</p>
+      </article>
+      <article class="benefit">
+        <div class="symbol">📱</div>
+        <h3>Ramah HP</h3>
+        <p>Gunakan dari browser Android, iPhone, tablet, maupun komputer.</p>
+      </article>
+      <article class="benefit">
+        <div class="symbol">🆓</div>
+        <h3>Gratis digunakan</h3>
+        <p>Gunakan fitur yang tersedia tanpa biaya penggunaan atau langganan.</p>
+      </article>
+      <article class="benefit">
+        <div class="symbol">🔒</div>
+        <h3>Proses di browser</h3>
+        <p>Alat-alat ini dirancang berjalan di perangkat pengguna tanpa mengirim input ke server DAWN TOOLS.</p>
+      </article>
+    </div>
+  </section>
 
-</div>
-</main>
+  <section class="section" id="tools">
+    <div class="section-head">
+      <h2>Temukan alat yang kamu butuhkan</h2>
+      <p>Pilih alat, masukkan data, lalu gunakan hasilnya.</p>
+    </div>
 
-<footer>
-  DAWN TOOLS • Free Digital Tools • Versi 2.0
-</footer>
+    <div class="toolbar">
+      <input class="search" id="toolSearch" type="search" placeholder="Cari alat, misalnya JSON atau password..." aria-label="Cari alat">
+    </div>
+    <div class="filters" aria-label="Filter kategori">
+      <button class="filter active" data-filter="all">Semua</button>
+      <button class="filter" data-filter="text">Pengolah teks</button>
+      <button class="filter" data-filter="developer">Developer</button>
+      <button class="filter" data-filter="utility">Utilitas</button>
+      <button class="filter" data-filter="productivity">Produktivitas</button>
+    </div>
 
-<script>
-const getValue = id => document.getElementById(id).value;
-const show = (id, value) => document.getElementById(id).textContent = value;
+    <div class="grid" id="toolGrid">
 
-async function copyResult(id) {
-  const value = document.getElementById(id).textContent;
-  try {
-    await navigator.clipboard.writeText(value);
-    alert("Hasil berhasil disalin.");
-  } catch {
-    alert("Tekan lama hasil, lalu pilih Salin.");
-  }
-}
+      <section class="card" data-category="text">
+        <div class="number">TOOL 01 • TEKS</div>
+        <h3>Penghitung Kata</h3>
+        <p class="desc">Hitung kata dan karakter untuk tugas, artikel, caption, atau dokumen.</p>
+        <textarea id="wordInput" placeholder="Ketik atau tempel teks..." oninput="countWords()"></textarea>
+        <div class="out" id="wordResult">0 kata • 0 karakter • 0 tanpa spasi</div>
+      </section>
 
-// 1. Penghitung kata
-function countWords() {
-  const text = getValue("wordInput");
-  const words = text.trim() ? text.trim().split(/\s+/u).length : 0;
-  show("wordResult",
-    `${words} kata • ${text.length} karakter • ${[...text].filter(c => !/\s/u.test(c)).length} tanpa spasi`);
-}
+      <section class="card" data-category="text">
+        <div class="number">TOOL 02 • TEKS</div>
+        <h3>Pengubah Huruf</h3>
+        <p class="desc">Ubah teks menjadi huruf besar, kecil, atau Title Case.</p>
+        <textarea id="caseInput" placeholder="Masukkan teks..."></textarea>
+        <button onclick="changeCase('upper')">HURUF BESAR</button>
+        <button class="alt" onclick="changeCase('lower')">huruf kecil</button>
+        <button class="alt" onclick="changeCase('title')">Title Case</button>
+        <div class="out" id="caseResult"></div>
+        <button class="alt" onclick="copyResult('caseResult')">Salin hasil</button>
+      </section>
 
-// 2. Pengubah huruf
-function changeCase(type) {
-  let text = getValue("caseInput");
-  if (type === "upper") text = text.toUpperCase();
-  if (type === "lower") text = text.toLowerCase();
-  if (type === "title") {
-    text = text.toLowerCase().replace(/\b\p{L}/gu, c => c.toUpperCase());
-  }
-  show("caseResult", text);
-}
+      <section class="card" data-category="text">
+        <div class="number">TOOL 03 • TEKS</div>
+        <h3>Pembersih Teks</h3>
+        <p class="desc">Rapikan spasi berlebih dan hilangkan baris kosong.</p>
+        <textarea id="cleanInput" placeholder="Masukkan teks..."></textarea>
+        <button onclick="cleanSpaces()">Rapikan spasi</button>
+        <button class="alt" onclick="removeEmptyLines()">Hapus baris kosong</button>
+        <div class="out" id="cleanResult"></div>
+        <button class="alt" onclick="copyResult('cleanResult')">Salin hasil</button>
+      </section>
 
-// 3. Pembersih teks
-function cleanSpaces() {
-  show("cleanResult",
-    getValue("cleanInput").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim());
-}
-function removeEmptyLines() {
-  show("cleanResult",
-    getValue("cleanInput").split(/\r?\n/).filter(line => line.trim()).join("\n"));
-}
+      <section class="card" data-category="text">
+        <div class="number">TOOL 04 • TEKS</div>
+        <h3>Pengurut Baris</h3>
+        <p class="desc">Urutkan daftar nama, kata, atau item berdasarkan abjad.</p>
+        <textarea id="sortInput" placeholder="Satu item per baris..."></textarea>
+        <button onclick="sortLines(false)">Urut A–Z</button>
+        <button class="alt" onclick="sortLines(true)">Urut Z–A</button>
+        <div class="out" id="sortResult"></div>
+        <button class="alt" onclick="copyResult('sortResult')">Salin hasil</button>
+      </section>
 
-// 4. Pengurut baris
-function sortLines(descending) {
-  const lines = getValue("sortInput").split(/\r?\n/).filter(x => x.trim());
-  lines.sort((a, b) => a.localeCompare(b, "id"));
-  if (descending) lines.reverse();
-  show("sortResult", lines.join("\n"));
-}
+      <section class="card" data-category="text">
+        <div class="number">TOOL 05 • TEKS</div>
+        <h3>Hapus Duplikat</h3>
+        <p class="desc">Bersihkan daftar dari baris yang sama atau berulang.</p>
+        <textarea id="duplicateInput" placeholder="Masukkan daftar, satu item per baris..."></textarea>
+        <button onclick="removeDuplicates()">Hapus duplikat</button>
+        <div class="out" id="duplicateResult"></div>
+        <button class="alt" onclick="copyResult('duplicateResult')">Salin hasil</button>
+      </section>
 
-// 5. Hapus duplikat
-function removeDuplicates() {
-  const lines = getValue("duplicateInput").split(/\r?\n/);
-  show("duplicateResult",
-    [...new Set(lines.map(x => x.trim()).filter(Boolean))].join("\n"));
-}
+      <section class="card" data-category="text">
+        <div class="number">TOOL 06 • TEKS</div>
+        <h3>Pembalik Teks</h3>
+        <p class="desc">Balik urutan karakter dalam sebuah teks.</p>
+        <textarea id="reverseInput" placeholder="Masukkan teks..."></textarea>
+        <button onclick="reverseText()">Balik teks</button>
+        <div class="out" id="reverseResult"></div>
+        <button class="alt" onclick="copyResult('reverseResult')">Salin hasil</button>
+      </section>
 
-// 6. Pembalik teks
-function reverseText() {
-  show("reverseResult", [...getValue("reverseInput")].reverse().join(""));
-}
+      <section class="card" data-category="developer">
+        <div class="number">TOOL 07 • DEVELOPER</div>
+        <h3>Formatter JSON</h3>
+        <p class="desc">Rapikan struktur JSON atau ringkas menjadi satu baris.</p>
+        <textarea id="jsonInput" placeholder='Contoh: {"nama":"DAWN","aktif":true}'></textarea>
+        <button onclick="formatJSON(false)">Format JSON</button>
+        <button class="alt" onclick="formatJSON(true)">Minify</button>
+        <div class="out" id="jsonResult"></div>
+        <button class="alt" onclick="copyResult('jsonResult')">Salin hasil</button>
+      </section>
 
-// 7. JSON
-function formatJSON(minify) {
-  try {
-    const parsed = JSON.parse(getValue("jsonInput"));
-    show("jsonResult", JSON.stringify(parsed, null, minify ? 0 : 2));
-  } catch (error) {
-    show("jsonResult", "JSON tidak valid: " + error.message);
-  }
-}
+      <section class="card" data-category="developer">
+        <div class="number">TOOL 08 • DEVELOPER</div>
+        <h3>Base64 Encoder / Decoder</h3>
+        <p class="desc">Encode teks menjadi Base64 atau decode kembali menjadi teks.</p>
+        <textarea id="baseInput" placeholder="Masukkan teks atau Base64..."></textarea>
+        <button onclick="base64Tool(false)">Encode</button>
+        <button class="alt" onclick="base64Tool(true)">Decode</button>
+        <div class="out" id="baseResult"></div>
+        <button class="alt" onclick="copyResult('baseResult')">Salin hasil</button>
+      </section>
 
-// 8. Base64
-function base64Tool(decode) {
-  try {
-    const text = getValue("baseInput");
-    if (decode) {
-      const binary = atob(text.trim());
-      const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-      show("baseResult", new TextDecoder().decode(bytes));
-    } else {
-      const bytes = new TextEncoder().encode(text);
-      let binary = "";
-      bytes.forEach(byte => binary += String.fromCharCode(byte));
-      show("baseResult", btoa(binary));
-    }
-  } catch {
-    show("baseResult", "Gagal. Periksa input atau format Base64.");
-  }
-}
+      <section class="card" data-category="developer">
+        <div class="number">TOOL 09 • DEVELOPER</div>
+        <h3>URL Encoder / Decoder</h3>
+        <p class="desc">Encode atau decode teks agar sesuai format komponen URL.</p>
+        <textarea id="urlInput" placeholder="Masukkan teks atau URL..."></textarea>
+        <button onclick="urlTool(false)">Encode URL</button>
+        <button class="alt" onclick="urlTool(true)">Decode URL</button>
+        <div class="out" id="urlResult"></div>
+        <button class="alt" onclick="copyResult('urlResult')">Salin hasil</button>
+      </section>
 
-// 9. URL
-function urlTool(decode) {
-  try {
-    const text = getValue("urlInput");
-    show("urlResult", decode ? decodeURIComponent(text) : encodeURIComponent(text));
-  } catch {
-    show("urlResult", "Format URL tidak valid.");
-  }
-}
+      <section class="card" data-category="developer">
+        <div class="number">TOOL 10 • DEVELOPER</div>
+        <h3>Pembuat Slug</h3>
+        <p class="desc">Ubah judul menjadi slug yang cocok untuk alamat halaman web.</p>
+        <textarea id="slugInput" placeholder="Judul artikel atau produk..."></textarea>
+        <button onclick="makeSlug()">Buat slug</button>
+        <div class="out" id="slugResult"></div>
+        <button class="alt" onclick="copyResult('slugResult')">Salin hasil</button>
+      </section>
 
-// 10. Slug
-function makeSlug() {
-  const slug = getValue("slugInput")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  show("slugResult", slug);
-}
+      <section class="card" data-category="utility">
+        <div class="number">TOOL 11 • UTILITAS</div>
+        <h3>Password Generator</h3>
+        <p class="desc">Buat password acak dengan panjang dan pilihan simbol.</p>
+        <label>Panjang password (8–64)</label>
+        <input id="passwordLength" type="number" min="8" max="64" value="18">
+        <label><input type="checkbox" id="passwordSymbols" checked> Sertakan simbol</label>
+        <button onclick="generatePassword()">Buat password</button>
+        <div class="out" id="passwordResult"></div>
+        <button class="alt" onclick="copyResult('passwordResult')">Salin hasil</button>
+        <small class="muted small">Jangan bagikan password kepada siapa pun.</small>
+      </section>
 
-// 11. Password generator
-function generatePassword() {
-  const length = Math.max(8, Math.min(64, Number(getValue("passwordLength")) || 18));
-  let chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
-  if (document.getElementById("passwordSymbols").checked) {
-    chars += "!@#$%^&*()-_=+[]{}?";
-  }
-  const random = new Uint32Array(length);
-  crypto.getRandomValues(random);
-  const password = Array.from(random, n => chars[n % chars.length]).join("");
-  show("passwordResult", password);
-}
+      <section class="card" data-category="utility">
+        <div class="number">TOOL 12 • UTILITAS</div>
+        <h3>Kalkulator</h3>
+        <p class="desc">Hitung operasi matematika dasar dengan tanda kurung.</p>
+        <label>Masukkan perhitungan</label>
+        <input id="calcInput" placeholder="Contoh: (12500*3)+5000">
+        <button onclick="calculate()">Hitung</button>
+        <div class="out" id="calcResult"></div>
+        <small class="muted small">Mendukung +, -, *, /, %, dan kurung.</small>
+      </section>
 
-// 12. Kalkulator dengan parser matematika sederhana
-function calculate() {
-  const input = getValue("calcInput").replace(/\s/g, "");
-  let pos = 0;
+      <section class="card" data-category="developer">
+        <div class="number">TOOL 13 • DEVELOPER</div>
+        <h3>Konverter HEX</h3>
+        <p class="desc">Konversi teks ke kode HEX dan kembalikan HEX menjadi teks.</p>
+        <textarea id="hexInput" placeholder="Masukkan teks..."></textarea>
+        <button onclick="textToHex()">Teks ke HEX</button>
+        <div class="out" id="hexResult"></div>
+        <button class="alt" onclick="hexToText()">HEX ke teks</button>
+      </section>
 
-  function expression() {
-    let value = term();
-    while (input[pos] === "+" || input[pos] === "-") {
-      const operator = input[pos++];
-      const next = term();
-      value = operator === "+" ? value + next : value - next;
-    }
-    return value;
-  }
+      <section class="card" data-category="productivity">
+        <div class="number">TOOL 14 • PRODUKTIVITAS</div>
+        <h3>Timer</h3>
+        <p class="desc">Atur waktu untuk belajar, bekerja, atau beristirahat.</p>
+        <label>Durasi dalam menit</label>
+        <input id="timerMinutes" type="number" min="1" max="240" value="5">
+        <button onclick="startTimer()">Mulai</button>
+        <button class="alt" onclick="stopTimer()">Berhenti</button>
+        <div class="out" id="timerResult">Timer siap digunakan.</div>
+      </section>
 
-  function term() {
-    let value = factor();
-    while (["*", "/", "%"].includes(input[pos])) {
-      const operator = input[pos++];
-      const next = factor();
-      if ((operator === "/" || operator === "%") && next === 0) {
-        throw new Error("Tidak bisa membagi dengan nol.");
-      }
-      if (operator === "*") value *= next;
-      if (operator === "/") value /= next;
-      if (operator === "%") value %= next;
-    }
-    return value;
-  }
+      <section class="card" data-category="productivity">
+        <div class="number">TOOL 15 • PRODUKTIVITAS</div>
+        <h3>Pembuat Checklist</h3>
+        <p class="desc">Ubah daftar tugas menjadi checklist teks yang mudah disalin.</p>
+        <textarea id="checkInput" placeholder="Satu tugas per baris..."></textarea>
+        <button onclick="makeChecklist()">Buat checklist</button>
+        <div class="out" id="checkResult"></div>
+        <button class="alt" onclick="copyResult('checkResult')">Salin hasil</button>
+      </section>
 
-  function factor() {
-    if (input[pos] === "+") { pos++; return factor(); }
-    if (input[pos] === "-") { pos++; return -factor(); }
-    if (input[pos] === "(") {
-      pos++;
-      const value = expression();
-      if (input[pos++] !== ")") throw new Error("Kurung tidak lengkap.");
-      return value;
-    }
-    const match = input.slice(pos).match(/^(?:\d+\.?\d*|\.\d+)/);
-    if (!match) throw new Error("Periksa angka dan operator.");
-    pos += match[0].length;
-    return Number(match[0]);
-  }
+    </div>
+    <div class="empty" id="noResults">Alat tidak ditemukan. Coba kata pencarian lain.</div>
+  </section>
 
-  try {
-    if (!input || !/^[0-9+\-*/().%]+$/.test(input)) {
-      throw new Error("Input tidak valid.");
-    }
-    const result = expression();
-    if (pos !== input.length || !Number.isFinite(result)) {
-      throw new Error("Perhitungan tidak valid.");
-    }
-    show("calcResult", String(result));
-  } catch (error) {
-    show("calcResult", error.message);
-  }
-}
-
-// 13. HEX
-function textToHex() {
-  const bytes = new TextEncoder().encode(getValue("hexInput"));
-  show("hexResult",
-    Array.from(bytes, b => b.toString(16).padStart(2, "0")).join(" "));
-}
-function hexToText() {
-  try {
-    const hex = getValue("hexResult").trim();
-    if (!hex || !/^(?:[0-9a-fA-F]{2}\s*)+$/.test(hex)) {
-      throw new Error();
-    }
-    const bytes = hex.trim().split(/\s+/).map(x => parseInt(x, 16));
-    show("hexResult", new TextDecoder().decode(new Uint8Array(bytes)));
-  } catch {
-    show("hexResult", "Format HEX tidak valid.");
-  }
-}
-
-// 14. Timer
-let timerInterval = null;
-function stopTimer() {
-  if (timerInterval) clearInterval(timerInterval);
-  timerInterval = null;
-}
-function startTimer() {
-  stopTimer();
-  let seconds = Math.max(1, Math.min(240, Number(getValue("timerMinutes")) || 1)) * 60;
-
-  function tick() {
-    const minutes = Math.floor(seconds / 60);
-    const remaining = seconds % 60;
-    show("timerResult",
-      `${minutes}:${String(remaining).padStart(2, "0")}`);
-
-    if (seconds <= 0) {
-      stopTimer();
-      show("timerResult", "Waktu habis!");
-      alert("Timer DAWN TOOLS selesai.");
-      return;
-    }
-    seconds--;
-  }
-
-  tick();
-  timerInterval = setInterval(tick, 1000);
-}
-
-// 15. Checklist
-function makeChecklist() {
-  const tasks = getValue("checkInput")
-    .split(/\r?\n/)
-    .map(x => x.trim())
-    .filter(Boolean);
-  show("checkResult", tasks.map(task => "☐ " + task).join("\n"));
-}
-</script>
-</body>
-</html>
+  <section class="section" id="guide">
+    <div class="section-head">
+      <h2>Cara menggunakan DAWN TOOLS</h2>
+      <p>Tidak perlu keahlian khusus untuk mulai menggunakan alat yang tersedia.</p>
+    </div>
+    <div class="info-grid">
+      <article class="info">
+        <h3>01. Pilih alat</h3>
+        <p>Cari alat melalui kolom pencarian atau pilih kategori yang sesuai kebutuhan.</p>
+      </article>
+      <article class="info">
+        <h3>02. Masukkan data</h3>
+        <p>Ketik atau tempel teks, angka, maupun data yang ingin diproses.</p>
+      </article>
+      <article class="info">
+        <h3>03. Proses hasil</h3>
+        <p>Tekan tombol sesuai fungsi alat. Hasil akan ditampilkan di halaman.</p>
+      </arti
